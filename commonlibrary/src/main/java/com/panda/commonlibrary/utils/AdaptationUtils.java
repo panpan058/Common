@@ -1,4 +1,4 @@
-package com.panda.commonlibrary;
+package com.panda.commonlibrary.utils;
 
 import android.app.Application;
 import android.content.ComponentCallbacks;

@@ -2,8 +2,8 @@ package com.panda.common
 
 import android.Manifest
 import android.os.Bundle
-import com.panda.commonlibrary.PermissionUtils
-import com.panda.commonlibrary.ToastUtils
+import com.panda.commonlibrary.utils.PermissionUtils
+import com.panda.commonlibrary.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_permission.*
 
 class PermissionActivity : BaseActivity(),

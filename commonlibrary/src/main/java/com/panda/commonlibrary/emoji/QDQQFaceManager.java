@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.panda.commonlibrary;
+package com.panda.commonlibrary.emoji;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -22,6 +22,7 @@ import android.util.SparseIntArray;
 
 import androidx.collection.ArrayMap;
 
+import com.panda.commonlibrary.R;
 import com.qmuiteam.qmui.qqface.IQMUIQQFaceManager;
 import com.qmuiteam.qmui.qqface.QQFace;
 

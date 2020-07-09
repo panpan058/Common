@@ -4,9 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
+import com.panda.commonlibrary.utils.ToastUtils
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog.MessageDialogBuilder
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction
+import java.lang.Exception
+import java.lang.reflect.ParameterizedType
 
 /*log日志扩展方法*/
 fun e(tag: String = BaseApp.getInstance().packageName, msg: String) {
@@ -39,6 +44,31 @@ fun AppCompatActivity.goActivity(clazz: Class<out AppCompatActivity>) {
     startActivity(Intent(this, clazz))
 }
 
+inline fun <reified AC : AppCompatActivity> AppCompatActivity.goActivity() {
+    startActivity(Intent(this, ktxClass<AC>()))
+
+}
+
+inline fun <reified VM : ViewModel> AppCompatActivity.initVM(): Class<VM> {
+    return ktxClass()
+}
+
+inline fun <reified VB : ViewBinding> AppCompatActivity.initVB(): Class<VB> {
+    return ktxClass()
+}
+
+fun <T> Any.toClass(): Class<T>? {
+    try {
+        val superClass = javaClass.genericSuperclass
+        if (superClass is ParameterizedType) {
+            return superClass.actualTypeArguments[0] as Class<T>
+        }
+    } catch (ex: Exception) {
+        return null
+    }
+    return null
+}
+
 /*显示对话框的扩展方法*/
 fun showCustomDialog(
     context: Context,
@@ -68,10 +98,14 @@ fun showCustomDialog(
         }
         .create(R.style.QMUI_Dialog).show()
 }
+
 /*Toast的扩展方法*/
 fun t(msg: String) {
     ToastUtils.show(msg)
 }
+
 fun t(msgId: Int) {
     ToastUtils.show(msgId)
 }
+
+inline fun <reified T> ktxClass() = T::class.java

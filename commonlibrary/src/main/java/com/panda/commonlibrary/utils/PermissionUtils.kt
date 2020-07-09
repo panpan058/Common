@@ -1,4 +1,4 @@
-package com.panda.commonlibrary
+package com.panda.commonlibrary.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

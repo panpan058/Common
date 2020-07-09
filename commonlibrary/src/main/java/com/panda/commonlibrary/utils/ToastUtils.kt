@@ -1,4 +1,4 @@
-package com.panda.commonlibrary
+package com.panda.commonlibrary.utils
 
 import com.coder.zzq.smartshow.toast.SmartToast
 

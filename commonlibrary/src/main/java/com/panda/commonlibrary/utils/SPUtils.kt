@@ -1,4 +1,4 @@
-package com.panda.commonlibrary
+package com.panda.commonlibrary.utils
 
 import android.os.Parcelable
 import com.tencent.mmkv.MMKV

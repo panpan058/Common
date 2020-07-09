@@ -1,4 +1,4 @@
-package com.panda.commonlibrary
+package com.panda.commonlibrary.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ImmersionBar

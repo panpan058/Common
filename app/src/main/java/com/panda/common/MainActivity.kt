@@ -1,7 +1,8 @@
 package com.panda.common
 
 import android.os.Bundle
-import com.panda.commonlibrary.StatusBarUtils
+import com.panda.common.activity.ChatInputActivity
+import com.panda.commonlibrary.utils.StatusBarUtils
 import com.panda.commonlibrary.goActivity
 import com.panda.commonlibrary.showCustomDialog
 import com.panda.commonlibrary.t
@@ -18,7 +19,7 @@ class MainActivity : BaseActivity() {
 
     private fun setOnClicks() {
         btn_permission.setOnClickListener {
-            goActivity(PermissionActivity::class.java)
+            goActivity<PermissionActivity>()
         }
         btn_qqFace.setOnClickListener {
             goActivity(QQFaceActivity::class.java)
@@ -33,6 +34,9 @@ class MainActivity : BaseActivity() {
                     t("取消了")
                 }, ensureString = "确定", cancelString = "取消"
             )
+        }
+        btn_chatInput.setOnClickListener {
+            goActivity<ChatInputActivity>()
         }
     }
 
