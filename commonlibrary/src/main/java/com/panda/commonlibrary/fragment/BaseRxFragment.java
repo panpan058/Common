@@ -4,10 +4,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.panda.commonlibrary.ExtensionsKt;
 import com.panda.commonlibrary.mvp.BaseContract;
 import com.panda.commonlibrary.mvp.BasePresenter;
-import com.panda.commonlibrary.utils.ToastUtils;
+import com.panda.commonlibrary.view.LoadingDialog;
 
 
 /**
@@ -23,19 +22,20 @@ import com.panda.commonlibrary.utils.ToastUtils;
 public abstract class BaseRxFragment<P extends BasePresenter> extends BaseFragment implements BaseContract.View {
 
     protected P mPresenter;
+    private LoadingDialog mDialog;
 
     @NonNull
-    protected abstract P initPresenter ();
+    protected abstract P initPresenter();
 
     @Override
-    public void onAttach (@NonNull Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mPresenter = initPresenter();
         mPresenter.attachView(this);
     }
 
     @Override
-    public void onDestroy () {
+    public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
@@ -44,13 +44,17 @@ public abstract class BaseRxFragment<P extends BasePresenter> extends BaseFragme
     }
 
     @Override
-    public void onError (String msg) {
-        ExtensionsKt.t(msg);
+    public void startLoading() {
+        if (mDialog == null) {
+            mDialog = new LoadingDialog(mContext);
+        }
+        mDialog.show();
     }
 
-
     @Override
-    public void netError () {
-        showNetError();
+    public void endLoading() {
+        if (mDialog != null) {
+            mDialog.cancel();
+        }
     }
 }

@@ -12,12 +12,16 @@ package com.panda.commonlibrary.mvp;
  */
 public interface BaseContract {
     interface View {
+        void startLoading();
+
+        void endLoading();
+
         void onError(String msg);
 
         void netError();
     }
 
-    interface Presenter<V extends BaseContract.View> {
+    interface Presenter<V extends View> {
         void attachView(V view);
 
         void detachView();

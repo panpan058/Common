@@ -1,4 +1,4 @@
-package com.panda.commonlibrary.adapter
+package com.panda.commonlibrary.adapter;
 
 import android.util.Log
 import android.view.LayoutInflater

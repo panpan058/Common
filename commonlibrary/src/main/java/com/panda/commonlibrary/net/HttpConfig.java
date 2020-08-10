@@ -14,7 +14,8 @@ public class HttpConfig {
     public static final long READ_TIMEOUT = 6000;
     public static final long WRITE_TIMEOUT = 6000;
     public static final long CONNECT_TIMEOUT = 6000;
-    public static final String BASE_URL = "https://www.wanandroid.com";
+    public static final String BASE_URL_DEBUG = "https://www.wanandroid.com";
+    public static final String BASE_URL_RELEASE = "https://www.wanandroid.com";
     public static final boolean DEBUG = true;
     public static final String CODE_SUCCESS = "0";//成功
     public static final String CODE_TOKEN_INVALID = "10001";//token错误

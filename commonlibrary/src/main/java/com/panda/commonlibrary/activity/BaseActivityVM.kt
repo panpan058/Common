@@ -6,10 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.panda.commonlibrary.databinding.LayoutFragmentBinding
-import com.panda.commonlibrary.initVM
-import com.panda.commonlibrary.ktxClass
-import com.panda.commonlibrary.toClass
 import java.lang.reflect.ParameterizedType
 
 /**

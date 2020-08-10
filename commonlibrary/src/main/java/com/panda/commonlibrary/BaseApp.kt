@@ -4,10 +4,10 @@ import android.app.Application
 import android.content.Context
 import com.coder.zzq.smartshow.core.SmartShow
 import com.panda.commonlibrary.emoji.QDQQFaceManager
+import com.panda.commonlibrary.extension.e
 import com.panda.commonlibrary.utils.AdaptationUtils
 import com.qmuiteam.qmui.qqface.QMUIQQFaceCompiler
 import com.tencent.mmkv.MMKV
-import xcrash.ICrashCallback
 import xcrash.XCrash
 
 open class BaseApp : Application() {
@@ -29,7 +29,7 @@ open class BaseApp : Application() {
     private fun initXCrash() {
         val params = XCrash.InitParameters()
         params.setJavaCallback { logPath, emergency ->
-            e( msg = "崩溃路径logPatch={$logPath}")
+            e(msg = "崩溃路径logPatch={$logPath}")
         }
         XCrash.init(this)
     }

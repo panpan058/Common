@@ -6,53 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Toolbar
+    <com.panda.commonlibrary.view.TopTitleBar
         android:id="@+id/tBar"
-        android:title="一些第三方库"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
+        app:isShowBack="true"
+        app:topTitleBarTitle="@string/thirdL"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="NewApi" />
 
-    <Button
-        android:id="@+id/btn_permission"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="权限"
-        app:layout_constraintBottom_toTopOf="@id/btn_qqFace"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tBar" />
-
-    <Button
-        android:id="@+id/btn_qqFace"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btn_showDialog"
-        android:text="QQ表情"
-        app:layout_constraintTop_toBottomOf="@+id/btn_permission"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_showDialog"
-        android:text="对话框"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btn_chatInput"
-        app:layout_constraintTop_toBottomOf="@+id/btn_qqFace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btn_chatInput"
-        android:text="输入框"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_showDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

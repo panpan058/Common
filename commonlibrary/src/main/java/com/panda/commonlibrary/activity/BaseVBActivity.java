@@ -7,47 +7,41 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.panda.commonlibrary.R;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.Field;
 
-
 /**
  * <pre>
  *     Created by ppW
  *     e-mail : wangpanpan05@163.com
- *     time   : 2019/02/25
+ *     time   : 2020/08/04 15:55
  *     desc   :
  *     version: 1.0   初始化
  *     params:
  *  <pre>
  */
-public abstract class BaseActivity extends RxAppCompatActivity {
-
-
-    /**
-     * @return 布局ID
-     */
-    @LayoutRes
-    protected abstract int initLayoutId();
-
+public abstract class BaseVBActivity<VB extends ViewBinding> extends RxAppCompatActivity {
     protected FrameLayout mRootView;
     protected View mContentView;
     protected View mNetErrorView;
+    protected VB vb;
 
+    protected abstract VB initVB();
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRootView = new FrameLayout(this);
-        mContentView = LayoutInflater.from(this).inflate(initLayoutId(), null);
+        vb = initVB();
+        mContentView = vb.getRoot();
         mNetErrorView = LayoutInflater.from(this).inflate(R.layout.layout_net_error, null);
         if (isRx()) {
-            mRootView.addView(mContentView);
             mRootView.addView(mNetErrorView);
+            mRootView.addView(mContentView);
             setContentView(mRootView);
             setPresenter();
         } else {
@@ -58,25 +52,25 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         bindListeners();
     }
 
-    protected void setPresenter() {
+    protected void setPresenter () {
 
     }
 
-    protected boolean isRx() {
+    protected boolean isRx () {
         return false;
     }
 
-    protected void bindListeners() {
+    protected void bindListeners () {
         mNetErrorView.setOnClickListener(v -> reQuest());
     }
 
-    protected void reQuest() {
+    protected void reQuest () {
 
     }
 
-    protected abstract void initData();
+    protected abstract void initData ();
 
-    protected void initView() {
+    protected void initView () {
         showContentLayout();
     }
 
@@ -86,7 +80,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 //    }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy () {
         super.onDestroy();
         mRootView = null;
         mContentView = null;
@@ -94,16 +88,15 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         fixInputMethodManagerLeak(this);
     }
 
-    protected final void showContentLayout() {
+    protected final void showContentLayout () {
         mNetErrorView.setVisibility(View.GONE);
         mContentView.setVisibility(View.VISIBLE);
     }
 
-    protected final void showNetErrorLayout() {
+    protected final void showNetErrorLayout () {
         mNetErrorView.setVisibility(View.VISIBLE);
         mContentView.setVisibility(View.GONE);
     }
-
     public static void fixInputMethodManagerLeak(Context destContext) {
         if (destContext == null) {
             return;
@@ -114,12 +107,12 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             return;
         }
 
-        String[] arr = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
+        String [] arr = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
         Field f = null;
         Object obj_get = null;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0;i < arr.length;i ++) {
             String param = arr[i];
-            try {
+            try{
                 f = imm.getClass().getDeclaredField(param);
                 if (f.isAccessible() == false) {
                     f.setAccessible(true);
@@ -137,7 +130,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                         break;
                     }
                 }
-            } catch (Throwable t) {
+            }catch(Throwable t){
                 t.printStackTrace();
             }
         }

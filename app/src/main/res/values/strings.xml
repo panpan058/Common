@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CommonApplication</string>
+    <string name="thirdL">一些三方库</string>
 </resources>

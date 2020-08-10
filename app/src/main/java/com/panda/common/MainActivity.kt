@@ -1,46 +1,59 @@
 package com.panda.common
 
-import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.panda.common.activity.ChatInputActivity
-import com.panda.commonlibrary.utils.StatusBarUtils
-import com.panda.commonlibrary.goActivity
-import com.panda.commonlibrary.showCustomDialog
-import com.panda.commonlibrary.t
-import kotlinx.android.synthetic.main.activity_main.*
+import com.panda.common.activity.ImagePickerActivity
+import com.panda.common.activity.PermissionActivity
+import com.panda.common.activity.QQFaceActivity
+import com.panda.common.adapter.MainActivityAdapter
+import com.panda.common.databinding.ActivityMainBinding
+import com.panda.commonlibrary.activity.BaseVBActivity
+import com.panda.commonlibrary.extension.goActivity
+import com.panda.commonlibrary.extension.showCustomDialog
+import com.panda.commonlibrary.extension.t
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseVBActivity<ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setOnClicks()
-        StatusBarUtils.steep(this, R.id.tBar)
+    private val mData: MutableList<String> by lazy {
+        arrayListOf(
+            "权限",
+            "qq表情",
+            "对话框",
+            "输入框",
+            "选择图片"
+        )
+    }
+    private val mAdapter: MainActivityAdapter by lazy {
+        MainActivityAdapter(mData)
     }
 
-    private fun setOnClicks() {
-        btn_permission.setOnClickListener {
-            goActivity<PermissionActivity>()
-        }
-        btn_qqFace.setOnClickListener {
-            goActivity(QQFaceActivity::class.java)
-        }
-        btn_showDialog.setOnClickListener {
-            showCustomDialog(
-                this,
-                "标题", "内容",
-                ensure = {
-                    t("确定了")
-                }, cancel = {
-                    t("取消了")
-                }, ensureString = "确定", cancelString = "取消"
-            )
-        }
-        btn_chatInput.setOnClickListener {
-            goActivity<ChatInputActivity>()
+    override fun initVB(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun initData() {
+        vb.rv.layoutManager = LinearLayoutManager(this)
+        vb.rv.adapter = mAdapter
+        mAdapter.recyclerView = vb.rv
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            when (position) {
+                0 -> goActivity<PermissionActivity>()
+                1 -> goActivity<QQFaceActivity>()
+                2 -> showDialog()
+                3 -> goActivity<ChatInputActivity>()
+                4->goActivity<ImagePickerActivity>()
+            }
         }
     }
 
-//    private fun goActivity(clazz: java.lang.Class<out AppCompatActivity>) {
-//        startActivity(Intent(this,clazz))
-//    }
+    private fun showDialog() {
+        showCustomDialog(
+            title = "标题",
+            msg = "信息",
+            ensure = {
+                t("确定")
+            }
+        )
+    }
+
 }

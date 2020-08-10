@@ -1,7 +1,8 @@
-package com.panda.common
+package com.panda.common.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.panda.common.R
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import kotlinx.android.synthetic.main.activity_q_q_face.*
 

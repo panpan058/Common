@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TopTitleBar">
+        <attr name="topTitleBarTitle" format="reference"></attr>
+        <attr name="isShowBack" format="boolean"></attr>
+        <attr name="isShowRight" format="boolean"></attr>
+        <attr name="rightTitle" format="reference"></attr>
+        <attr name="bColor" format="color"></attr>
+        <attr name="titleTextColor" format="color"></attr>
+        <attr name="rightTextColor" format="color"></attr>
+        <attr name="backIcon" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="TagFlowLayout">
+        <attr name="max_select" format="integer"></attr>
+        <attr name="tag_gravity">
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

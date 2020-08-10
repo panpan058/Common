@@ -1,16 +1,11 @@
 package com.panda.common.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.MenuItem
 import cn.jiguang.imui.chatinput.listener.OnMenuClickListener
 import cn.jiguang.imui.chatinput.model.FileItem
-import com.panda.common.R
 import com.panda.common.databinding.ActivityChatInputBinding
 import com.panda.common.viewmodel.ChatInputViewModel
-import com.panda.commonlibrary.activity.BaseActivity
 import com.panda.commonlibrary.activity.BaseActivityVM
-import com.panda.commonlibrary.e
+import com.panda.commonlibrary.extension.e
 
 class ChatInputActivity : BaseActivityVM<ChatInputViewModel, ActivityChatInputBinding>() {
     override fun initData() {

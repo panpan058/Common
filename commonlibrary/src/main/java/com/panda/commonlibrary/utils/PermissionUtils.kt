@@ -1,66 +1,34 @@
 package com.panda.commonlibrary.utils
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.ppw.permission.PPWPermissions
-import com.ppw.permission.PermissionCallback
+import com.permissionx.guolindev.PermissionX
 
-public object PermissionUtils {
+object PermissionUtils {
     fun request(
         activity: AppCompatActivity?,
         callback: PandaCallback?,
         vararg permissions: String?
     ) {
-        PPWPermissions.getInstance()
-            .with(activity)
+        PermissionX.init(activity)
             .permissions(*permissions)
-            .request(object :PermissionCallback{
-                override fun noPermission() {
-                    callback?.noPermission()
-                }
-
-                override fun doNotAsk() {
-                    callback?.doNotAsk()
-                }
-
-                override fun hasPermission() {
+            .explainReasonBeforeRequest()
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(deniedList, "即将重新申请的权限是程序必须依赖的权限", "我已明白", "取消")
+            }.onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(deniedList,"您需要去应用程序设置当中手动开启权限", "我已明白", "取消")
+            }
+            .request { allGranted, _, deniedList ->
+                if (allGranted) {
                     callback?.hasPermission()
+                } else {
+                    callback?.noPermission(deniedList)
                 }
-
-            })
+            }
     }
 
-    fun request(
-        fragment: Fragment?,
-        callback: PandaCallback?,
-        vararg permissions: String?
-    ) {
-        PPWPermissions.getInstance()
-            .with(fragment)
-            .permissions(*permissions)
-            .request(object :PermissionCallback{
-                override fun noPermission() {
-                    callback?.noPermission()
-                }
+    interface PandaCallback {
 
-                override fun doNotAsk() {
-                    callback?.doNotAsk()
-                }
-
-                override fun hasPermission() {
-                    callback?.hasPermission()
-                }
-
-            })
+        fun noPermission(deniedList: MutableList<String>)
+        fun hasPermission()
     }
-     interface PandaCallback {
-          fun doNotAsk() {
-         }
-
-          fun noPermission() {
-         }
-
-          fun hasPermission() {
-         }
-     }
 }
