@@ -18,7 +18,7 @@ import java.lang.reflect.ParameterizedType
  *     params:
  *  <pre>
  */
-open abstract class BaseActivityVM<VM : ViewModel, VB : ViewBinding> : AppCompatActivity() {
+abstract class BaseVMActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivity() {
     lateinit var model: VM
     lateinit var vb: VB
     override fun onCreate(savedInstanceState: Bundle?) {

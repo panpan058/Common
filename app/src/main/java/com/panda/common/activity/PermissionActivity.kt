@@ -1,16 +1,10 @@
 package com.panda.common.activity
 
 import android.Manifest
-import android.os.Bundle
-import com.panda.common.BaseActivity
-import com.panda.common.R
 import com.panda.common.databinding.ActivityPermissionBinding
 import com.panda.commonlibrary.activity.BaseVBActivity
 import com.panda.commonlibrary.extension.permission
 import com.panda.commonlibrary.extension.t
-import com.panda.commonlibrary.utils.PermissionUtils
-import com.panda.commonlibrary.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_permission.*
 
 class PermissionActivity : BaseVBActivity<ActivityPermissionBinding>() {
 
@@ -20,7 +14,7 @@ class PermissionActivity : BaseVBActivity<ActivityPermissionBinding>() {
     }
 
     override fun initData() {
-        vb.btnRequestPermission.setOnClickListener {
+        vb?.btnRequestPermission?.setOnClickListener {
             permission(
                 this,
                 hasPermission = {

@@ -1,8 +1,5 @@
 package com.panda.common.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.panda.common.R
 import com.panda.common.databinding.ActivityImagePickerBinding
 import com.panda.commonlibrary.activity.BaseVBActivity
 import com.panda.commonlibrary.extension.load
@@ -15,21 +12,22 @@ class ImagePickerActivity : BaseVBActivity<ActivityImagePickerBinding>() {
     }
 
     override fun initData() {
-        vb.ivCamera.setOnClickListener {
+
+        vb?.ivCamera?.setOnClickListener {
             openCamera(
                 this,
                 onImages = {
-                    vb.ivCamera.load(
+                    vb!!.ivCamera.load(
                         this,
                         it[0].androidQToPath
                     )
                 }
             )
         }
-        vb.ivPicker.setOnClickListener {
+        vb?.ivPicker?.setOnClickListener {
             selectPicture(this
                 , onImages = {
-                    vb.ivPicker.load(
+                    vb!!.ivPicker.load(
                         this,
                         it[0].androidQToPath
                     )

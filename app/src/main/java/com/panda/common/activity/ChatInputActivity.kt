@@ -4,10 +4,10 @@ import cn.jiguang.imui.chatinput.listener.OnMenuClickListener
 import cn.jiguang.imui.chatinput.model.FileItem
 import com.panda.common.databinding.ActivityChatInputBinding
 import com.panda.common.viewmodel.ChatInputViewModel
-import com.panda.commonlibrary.activity.BaseActivityVM
+import com.panda.commonlibrary.activity.BaseVMActivity
 import com.panda.commonlibrary.extension.e
 
-class ChatInputActivity : BaseActivityVM<ChatInputViewModel, ActivityChatInputBinding>() {
+class ChatInputActivity : BaseVMActivity<ChatInputViewModel, ActivityChatInputBinding>() {
     override fun initData() {
         vb.chatInput.setMenuContainerHeight(800)
         vb.chatInput.setMenuClickListener(object :OnMenuClickListener{

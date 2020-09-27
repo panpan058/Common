@@ -81,6 +81,11 @@ public abstract class BaseRxVBFragment<P extends BasePresenter, VB extends ViewB
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView();
+    }
+
+    protected void initView() {
+
     }
 
 

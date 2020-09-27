@@ -20,7 +20,7 @@ abstract class BaseVBFragment<VB : ViewBinding> : RxFragment() {
     lateinit var vb: VB
     private var isLoaded = false
 
-    protected abstract fun initVB(): VB
+    protected abstract fun initVB(container: ViewGroup?): VB
 
     protected abstract fun initData()
 
@@ -42,8 +42,8 @@ abstract class BaseVBFragment<VB : ViewBinding> : RxFragment() {
             val frameLayout =
                 mRootView!!.findViewById<FrameLayout>(R.id.fl_layoutFragment)
             mLayoutNetError = inflater.inflate(R.layout.layout_net_error, null)
-            vb = initVB()
-            mLayoutContent = vb?.root
+            vb = initVB(container)
+            mLayoutContent = vb.root
             frameLayout.addView(mLayoutContent)
             frameLayout.addView(mLayoutNetError)
         }

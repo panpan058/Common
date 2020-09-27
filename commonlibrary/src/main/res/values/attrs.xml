@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TopTitleBar">
-        <attr name="topTitleBarTitle" format="reference"></attr>
+        <attr name="topTitleBarTitle" format="reference|string"></attr>
         <attr name="isShowBack" format="boolean"></attr>
         <attr name="isShowRight" format="boolean"></attr>
-        <attr name="rightTitle" format="reference"></attr>
+        <attr name="rightTitle" format="reference|string"></attr>
         <attr name="bColor" format="color"></attr>
         <attr name="titleTextColor" format="color"></attr>
         <attr name="rightTextColor" format="color"></attr>

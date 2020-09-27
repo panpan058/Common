@@ -1,10 +1,7 @@
 package com.panda.common
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.panda.common.activity.ChatInputActivity
-import com.panda.common.activity.ImagePickerActivity
-import com.panda.common.activity.PermissionActivity
-import com.panda.common.activity.QQFaceActivity
+import com.panda.common.activity.*
 import com.panda.common.adapter.MainActivityAdapter
 import com.panda.common.databinding.ActivityMainBinding
 import com.panda.commonlibrary.activity.BaseVBActivity
@@ -20,7 +17,8 @@ class MainActivity : BaseVBActivity<ActivityMainBinding>() {
             "qq表情",
             "对话框",
             "输入框",
-            "选择图片"
+            "选择图片",
+            "WebView优化"
         )
     }
     private val mAdapter: MainActivityAdapter by lazy {
@@ -32,18 +30,22 @@ class MainActivity : BaseVBActivity<ActivityMainBinding>() {
     }
 
     override fun initData() {
-        vb.rv.layoutManager = LinearLayoutManager(this)
-        vb.rv.adapter = mAdapter
-        mAdapter.recyclerView = vb.rv
-        mAdapter.setOnItemClickListener { adapter, view, position ->
-            when (position) {
-                0 -> goActivity<PermissionActivity>()
-                1 -> goActivity<QQFaceActivity>()
-                2 -> showDialog()
-                3 -> goActivity<ChatInputActivity>()
-                4->goActivity<ImagePickerActivity>()
+        vb?.apply {
+            rv.layoutManager = LinearLayoutManager(this@MainActivity)
+            rv.adapter = mAdapter
+            mAdapter.recyclerView = rv
+            mAdapter.setOnItemClickListener { adapter, view, position ->
+                when (position) {
+                    0 -> goActivity<PermissionActivity>()
+                    1 -> goActivity<QQFaceActivity>()
+                    2 -> showDialog()
+                    3 -> goActivity<ChatInputActivity>()
+                    4 -> goActivity<ImagePickerActivity>()
+                    5 -> goActivity<WebViewActivity>()
+                }
             }
         }
+
     }
 
     private fun showDialog() {

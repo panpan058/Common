@@ -68,8 +68,7 @@ open class BasePresenter<V : BaseContract.View> : BaseContract.Presenter<V> {
                 )
             }
             else -> {
-                mContext = WeakReference(v as RxAppCompatActivity?)
-                (v as RxAppCompatActivity).bindUntilEvent(ActivityEvent.DESTROY)
+                throw Exception("mView只能绑定RxAppCompatActivity,RxFragment,RxDialogFragment三者之一")
             }
         }
     }
@@ -83,6 +82,10 @@ open class BasePresenter<V : BaseContract.View> : BaseContract.Presenter<V> {
     ) {
         api.subscribeOn(Schedulers.io())
             .compose(getLife())
+            .map {
+
+                return@map it
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : BaseCallBack<T>() {
                 override fun onSuccess(data: T) {

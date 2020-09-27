@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.QQFaceActivity">
+    tools:context=".activity.WebViewActivity">
 
     <com.panda.commonlibrary.view.TopTitleBar
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="?attr/actionBarSize"
         app:isShowBack="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/qmui_config_color_white"
-        app:topTitleBarTitle="QQ表情" />
+        app:rightTitle="注意事项"
+        app:topTitleBarTitle="WebView优化" />
 
-    <com.qmuiteam.qmui.qqface.QMUIQQFaceView
-        android:id="@+id/qfv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <WebView
+        android:id="@+id/wv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
