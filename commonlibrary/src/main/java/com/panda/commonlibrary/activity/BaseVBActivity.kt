@@ -33,11 +33,11 @@ abstract class BaseVBActivity<VB : ViewBinding?> : RxAppCompatActivity() {
         super.onCreate(savedInstanceState)
         mRootView = FrameLayout(this)
         vb = initVB()
-        mContentView = vb!!.root
+        mContentView = vb?.root
         mNetErrorView = LayoutInflater.from(this).inflate(R.layout.layout_net_error, null)
         if (isRx) {
-            mRootView!!.addView(mNetErrorView)
-            mRootView!!.addView(mContentView)
+            mRootView?.addView(mNetErrorView)
+            mRootView?.addView(mContentView)
             setContentView(mRootView)
             setPresenter()
         } else {
@@ -53,7 +53,7 @@ abstract class BaseVBActivity<VB : ViewBinding?> : RxAppCompatActivity() {
         protected get() = false
 
     protected fun bindListeners() {
-        mNetErrorView!!.setOnClickListener { reQuest() }
+        mNetErrorView?.setOnClickListener { reQuest() }
     }
 
     protected fun reQuest() {}
@@ -75,29 +75,28 @@ abstract class BaseVBActivity<VB : ViewBinding?> : RxAppCompatActivity() {
     }
 
     protected fun showContentLayout() {
-        mNetErrorView!!.visibility = View.GONE
-        mContentView!!.visibility = View.VISIBLE
+        mNetErrorView?.visibility = View.GONE
+        mContentView?.visibility = View.VISIBLE
     }
 
     protected fun showNetErrorLayout() {
-        mNetErrorView!!.visibility = View.VISIBLE
-        mContentView!!.visibility = View.GONE
+        mNetErrorView?.visibility = View.VISIBLE
+        mContentView?.visibility = View.GONE
     }
 
     open fun startLoading() {
         if (mLoadingDialog == null) {
             mLoadingDialog = LoadingDialog(this)
-            mLoadingDialog!!.setOnDismissListener { endLoading() }
+            mLoadingDialog?.setOnDismissListener { endLoading() }
         }
-        mLoadingDialog!!.show()
+        mLoadingDialog?.show()
     }
 
     open fun endLoading() {
         if (mLoadingDialog != null) {
-            mLoadingDialog!!.cancel()
+            mLoadingDialog?.cancel()
         }
     }
-
 
 
     companion object {

@@ -18,8 +18,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  */
 abstract class BaseVBAdapter<T, VB : ViewBinding>(data: MutableList<T>) :
     BaseQuickAdapter<T, BaseVBAdapter.BaseVHVB<VB>>(
-        0, data
-    ) {
+        0, data) {
     class BaseVHVB<VB : ViewBinding>(val viewBinding: VB) : BaseViewHolder(viewBinding.root)
 
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): BaseVHVB<VB> {

@@ -110,4 +110,39 @@ open class BasePresenter<V : BaseContract.View> : BaseContract.Presenter<V> {
             })
 
     }
+
+    fun <T> postDataWithMap(
+        api: Observable<BaseResponseBody<T>>,
+        apiSuccess: (T) -> Unit,
+        map: (T) -> BaseResponseBody<T>
+    ) {
+        api.subscribeOn(Schedulers.io())
+            .compose(getLife())
+            .map {
+               return@map map(it.data)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : BaseCallBack<T>() {
+                override fun onSuccess(data: T) {
+                    apiSuccess.invoke(data)
+                }
+
+                override fun startLoading() {
+                    view?.startLoading()
+                }
+
+                override fun endLoading() {
+                    view?.endLoading()
+                }
+
+                override fun onError(errorMsg: String?) {
+                    view?.onError(errorMsg)
+                }
+
+                override fun onNetError() {
+                    view?.netError()
+                }
+            })
+
+    }
 }

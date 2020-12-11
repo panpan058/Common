@@ -22,6 +22,12 @@ object SPUtils {
 
     }
 
+    fun put(vararg pair: Pair<String, Any>) {
+        pair.forEach {
+            put(it.first, it.second)
+        }
+    }
+
     /*如果存储的对象,则传入Object.class*/
     fun <T> get(key: String, defaultValue: Any): T {
         return when (defaultValue) {
