@@ -21,8 +21,16 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("boolean", "IS_DEBUG", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            if (isDebug.toBoolean()) {
+                buildConfigField("boolean", "IS_DEBUG", "true")
+            } else {
+                buildConfigField("boolean", "IS_DEBUG", "false")
+            }
         }
     }
     buildFeatures {
@@ -93,4 +101,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     api 'org.greenrobot:eventbus:3.2.0'
+    //日志 log
+    api 'com.github.pqpo:Log4a:v1.5.0'
 }

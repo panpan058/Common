@@ -11,6 +11,7 @@ import com.panda.commonlibrary.BaseApp
 import com.panda.commonlibrary.BuildConfig
 import com.panda.commonlibrary.utils.ToastUtils
 import com.permissionx.guolindev.PermissionX
+import me.pqpo.librarylog4a.Log4a
 
 /*log日志扩展方法*/
 fun e(tag: String = BaseApp.getInstance().packageName, msg: String) {

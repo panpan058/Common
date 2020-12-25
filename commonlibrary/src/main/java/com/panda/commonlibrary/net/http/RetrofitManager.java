@@ -2,6 +2,7 @@ package com.panda.commonlibrary.net.http;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.panda.commonlibrary.BuildConfig;
 import com.panda.commonlibrary.net.HttpConfig;
 import com.panda.commonlibrary.net.interceptor.FilterInterceptor;
 import com.panda.commonlibrary.net.interceptor.HeaderInterceptor;
@@ -41,7 +42,8 @@ public class RetrofitManager {
 //                .addInterceptor(Pandora.get().getInterceptor())
                 .retryOnConnectionFailure(true);
 
-        if (HttpConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
+            //debug模式下 不管是正式环境还是测试环境都打印日志
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(httpLoggingInterceptor);

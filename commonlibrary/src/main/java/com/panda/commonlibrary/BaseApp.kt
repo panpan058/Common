@@ -6,6 +6,7 @@ import com.coder.zzq.smartshow.core.SmartShow
 import com.panda.commonlibrary.emoji.QDQQFaceManager
 import com.panda.commonlibrary.extension.e
 import com.panda.commonlibrary.utils.AdaptationUtils
+import com.panda.commonlibrary.utils.LogInit
 import com.qmuiteam.qmui.qqface.QMUIQQFaceCompiler
 import com.tencent.mmkv.MMKV
 import xcrash.XCrash
@@ -18,6 +19,7 @@ open class BaseApp : Application() {
         MMKV.initialize(this)
         AdaptationUtils.initAppDensity(this)
         QMUIQQFaceCompiler.setDefaultQQFaceManager(QDQQFaceManager.getInstance())
+        LogInit.init(this)
     }
 
     override fun attachBaseContext(base: Context?) {
