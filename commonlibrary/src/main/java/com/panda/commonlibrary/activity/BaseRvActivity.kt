@@ -6,6 +6,8 @@ import androidx.viewbinding.ViewBinding
 import com.panda.commonlibrary.R
 import com.panda.commonlibrary.adapter.BaseVBAdapter
 import com.panda.commonlibrary.databinding.LayoutRvBinding
+import com.panda.commonlibrary.extension.goActivity
+import org.jetbrains.anko.startActivity
 
 /**
  * <pre>
@@ -65,7 +67,6 @@ abstract class BaseRvActivity<T, AD : BaseVBAdapter<T, in ViewBinding>> :
     }
 
     fun onLoadMore() {
-
     }
 
     fun onRefresh() {

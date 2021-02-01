@@ -45,7 +45,6 @@ class MainActivity : BaseVBActivity<ActivityMainBinding>() {
                 }
             }
         }
-
     }
 
     private fun showDialog() {

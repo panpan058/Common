@@ -1,28 +1,31 @@
 package com.panda.commonlibrary.extension
 
+import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.coder.zzq.smartshow.dialog.EnsureDialog
 import com.gyf.immersionbar.ImmersionBar
+import com.jiongbull.jlog.JLog
 import com.panda.commonlibrary.BaseApp
 import com.panda.commonlibrary.BuildConfig
 import com.panda.commonlibrary.utils.ToastUtils
 import com.permissionx.guolindev.PermissionX
-import me.pqpo.librarylog4a.Log4a
+import java.io.Serializable
 
 /*log日志扩展方法*/
 fun e(tag: String = BaseApp.getInstance().packageName, msg: String) {
     if (BuildConfig.DEBUG) {
-        Log.e(tag, msg)
+       JLog.e(msg)
     }
 }
 
 fun d(tag: String = BuildConfig.LIBRARY_PACKAGE_NAME, msg: String) {
     if (BuildConfig.DEBUG) {
-        Log.d(tag, msg)
+        JLog.json(msg)
     }
 }
 
@@ -87,7 +90,8 @@ fun Fragment.goActivity(
 }
 
 inline fun <reified AC : AppCompatActivity> Fragment.goActivity(vararg pair: Pair<String, Parcelable>) {
-    var intent = Intent(context,
+    var intent = Intent(
+        context,
         ktxClass<AC>()
     )
     pair.forEach {
@@ -105,9 +109,12 @@ inline fun <reified AC : AppCompatActivity> AppCompatActivity.goActivity(vararg 
 }
 
 inline fun <reified AC : AppCompatActivity> Fragment.goActivity() {
-    startActivity(Intent(activity,
-        ktxClass<AC>()
-    ))
+    startActivity(
+        Intent(
+            activity,
+            ktxClass<AC>()
+        )
+    )
 }
 
 inline fun <reified AC : AppCompatActivity> AppCompatActivity.goActivity() {
@@ -185,4 +192,48 @@ fun permission(
                 noPermission(deniedList)
             }
         }
+}
+
+inline fun <reified T : Activity> Activity.goActivity(vararg params: Pair<String, Any?>) {
+    val intent = Intent(this, T::class.java)
+    if (params.isNotEmpty()) {
+        fillIntentArguments(intent, *params)
+    }
+    startActivity(intent)
+}
+
+fun fillIntentArguments(intent: Intent, vararg params: Pair<String, Any?>) {
+    params.forEach {
+        val value = it.second
+        when (value) {
+            null -> intent.putExtra(it.first, null as Serializable?)
+            is Int -> intent.putExtra(it.first, value)
+            is Long -> intent.putExtra(it.first, value)
+            is CharSequence -> intent.putExtra(it.first, value)
+            is String -> intent.putExtra(it.first, value)
+            is Float -> intent.putExtra(it.first, value)
+            is Double -> intent.putExtra(it.first, value)
+            is Char -> intent.putExtra(it.first, value)
+            is Short -> intent.putExtra(it.first, value)
+            is Boolean -> intent.putExtra(it.first, value)
+            is Serializable -> intent.putExtra(it.first, value)
+            is Bundle -> intent.putExtra(it.first, value)
+            is Parcelable -> intent.putExtra(it.first, value)
+            is Array<*> -> when {
+                value.isArrayOf<CharSequence>() -> intent.putExtra(it.first, value)
+                value.isArrayOf<String>() -> intent.putExtra(it.first, value)
+                value.isArrayOf<Parcelable>() -> intent.putExtra(it.first, value)
+                else -> throw Exception("Intent extra ${it.first} has wrong type ${value.javaClass.name}")
+            }
+            is IntArray -> intent.putExtra(it.first, value)
+            is LongArray -> intent.putExtra(it.first, value)
+            is FloatArray -> intent.putExtra(it.first, value)
+            is DoubleArray -> intent.putExtra(it.first, value)
+            is CharArray -> intent.putExtra(it.first, value)
+            is ShortArray -> intent.putExtra(it.first, value)
+            is BooleanArray -> intent.putExtra(it.first, value)
+            else -> throw Exception("Intent extra ${it.first} has wrong type ${value.javaClass.name}")
+        }
+        return@forEach
+    }
 }

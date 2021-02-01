@@ -18,7 +18,7 @@ import com.panda.commonlibrary.view.LoadingDialog;
  *     params:
  *  <pre>
  */
-public abstract class BaseRxActivity<P extends BasePresenter> extends BaseActivity implements BaseContract.View {
+public abstract class BaseRxActivity<P extends BasePresenter<? super BaseContract.View>> extends BaseActivity implements BaseContract.View {
     protected P mPresenter;
     private LoadingDialog mLoadingDialog;
 

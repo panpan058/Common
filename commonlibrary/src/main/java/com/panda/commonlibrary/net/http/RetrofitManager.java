@@ -2,6 +2,7 @@ package com.panda.commonlibrary.net.http;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jiongbull.jlog.JLog;
 import com.panda.commonlibrary.BuildConfig;
 import com.panda.commonlibrary.net.HttpConfig;
 import com.panda.commonlibrary.net.interceptor.FilterInterceptor;
@@ -44,7 +45,7 @@ public class RetrofitManager {
 
         if (BuildConfig.DEBUG) {
             //debug模式下 不管是正式环境还是测试环境都打印日志
-            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(JLog::json);
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(httpLoggingInterceptor);
         }

@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import androidx.viewbinding.ViewBinding
 import com.panda.commonlibrary.R
+import com.panda.commonlibrary.viewbind.inflateBindingWithGeneric
 import com.panda.commonlibrary.view.LoadingDialog
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 import java.lang.reflect.Field
@@ -22,13 +23,16 @@ import java.lang.reflect.Field
  * params:
  * <pre>
 </pre></pre> */
-abstract class BaseVBActivity<VB : ViewBinding?> : RxAppCompatActivity() {
+abstract class BaseVBActivity<VB : ViewBinding> : RxAppCompatActivity() {
     protected var mRootView: FrameLayout? = null
     protected var mContentView: View? = null
     protected var mNetErrorView: View? = null
     protected var vb: VB? = null
     private var mLoadingDialog: LoadingDialog? = null
     protected abstract fun initVB(): VB
+    private fun initVB2(): VB {
+        return inflateBindingWithGeneric(layoutInflater)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mRootView = FrameLayout(this)
